@@ -1,4 +1,9 @@
 import { Module } from '@nestjs/common';
+import { QuizResolver } from './quiz.resolver';
 
-@Module({})
+@Module({
+    providers: [
+        QuizResolver,
+       ]
+})
 export class QuizModule {}
