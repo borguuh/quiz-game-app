@@ -1,14 +1,26 @@
-import { Query, Resolver } from "@nestjs/graphql";
+import { Args, Mutation, Query, Resolver } from "@nestjs/graphql";
 import { QuizType } from "./quiz.type";
+import { QuizService } from "./quiz.service";
 
 @Resolver(of => QuizType)
 export class QuizResolver {
+    constructor(
+        private quizService: QuizService,
+      ) {}
+
+
     @Query(returns => QuizType)
-    quiz(){
-        return {
-            id: "1f3",
-            title: "First Quiz",
-            description: "The first one"
-        }
+    quiz(
+        @Args("id") id: string,
+    ){
+        return this.quizService.getQuiz(id)       
     }   
+
+    @Mutation(returns => QuizType)
+    createQuiz(
+      @Args('title') title: string,
+      @Args('description') description: string, 
+    ) {
+      return this.quizService.createQuiz( title, description);
+    }
 }

@@ -10,8 +10,11 @@ export class QuizService {
         @InjectRepository(Quiz) private quizRepository: Repository<Quiz>,
       ) {}
 
+      async getQuiz(id: string): Promise<Quiz> {
+        return this.quizRepository.findOne({ id });
+      }
 
-    async createLesson(title, description): Promise<Quiz> {
+    async createQuiz(title, description): Promise<Quiz> {
 
         const quiz = this.quizRepository.create({
           id: uuid(),
