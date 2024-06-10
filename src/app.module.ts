@@ -3,6 +3,8 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { QuizModule } from './quiz/quiz.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Quiz } from './quiz/quiz.entity';
+import { QuestionModule } from './question/question.module';
+import { Question } from './question/question.entity';
 
 
 @Module({
@@ -13,13 +15,15 @@ import { Quiz } from './quiz/quiz.entity';
       synchronize: true,
       useUnifiedTopology: true,
       entities: [
-        Quiz
+        Quiz,
+        Question
       ]
     }),
     GraphQLModule.forRoot({
       autoSchemaFile: true
     }),
     QuizModule,
+    QuestionModule,
   ],
 
 })
